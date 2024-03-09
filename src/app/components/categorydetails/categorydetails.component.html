@@ -1,0 +1,68 @@
+<section>
+  <h1 class="text-center">{{ categoryName }}</h1>
+  <input
+    type="search"
+    class="form-control w-50 mx-auto my-3"
+    placeholder="Search"
+    [(ngModel)]="searchTerm"
+  />
+  <div class="row justify-content-center">
+    <div
+      class="col-md-4 col-lg-2 my-3"
+      *ngFor="let product of categoryDetails | search : searchTerm"
+    >
+      <div class="product">
+        <div class="product">
+          <button
+            *ngIf="product.wishlist"
+            class="my-btn rounded-3 mt-2 ms-2"
+            (click)="removeFromWishlist(product._id)"
+          >
+            <i
+              class="fa-solid fa-heart"
+              [ngClass]="product.wishlist ? 'text-danger' : 'text-white'"
+            ></i>
+            - Remove from Wishlist
+          </button>
+          <button
+            *ngIf="!product.wishlist"
+            class="my-btn rounded-3 mt-2 ms-2"
+            (click)="addProductToWishlist(product._id)"
+          >
+            <i
+              class="fa-solid fa-heart"
+              [ngClass]="product.wishlist ? 'text-danger' : 'text-white'"
+            ></i>
+            + Add to Wishlist
+          </button>
+
+          <div
+            [routerLink]="['/details', product._id]"
+            class="p-2 cursor-pointer"
+          >
+            <img
+              [src]="product.imageCover"
+              class="w-100"
+              [alt]="product.title"
+            />
+            <h3 class="h6">{{ product.category.name | buy }}</h3>
+            <h4 class="h6">{{ product.title | termText }}</h4>
+            <div class="d-flex align-items-center justify-content-between">
+              <span>{{ product.price | currency : " EGP " }} </span>
+              <div>
+                <i class="fas fa-star rating-color"></i>
+                <span class="text-muted"> {{ product.ratingsAverage }} </span>
+              </div>
+            </div>
+          </div>
+          <button
+            class="btn-main w-100"
+            (click)="addProductToCart(product._id)"
+          >
+            Add Product
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

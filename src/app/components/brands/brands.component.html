@@ -1,0 +1,23 @@
+<section>
+  <h1 class="text-center my-4">All Brands</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-3 my-3" *ngFor="let brand of brands">
+      <div class="product">
+        <div
+          (click)="brandDetails(brand._id, brand.name)"
+          class="p-2 cursor-pointer"
+        >
+          <img
+            [src]="brand.image"
+            height="350"
+            class="w-100"
+            [alt]="brand.name"
+          />
+          <h4 class="h6 text-center my-2 fw-bold text-main">
+            {{ brand.name }}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

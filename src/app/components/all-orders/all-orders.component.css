@@ -1,0 +1,13 @@
+.owl-theme .owl-nav [class*="owl-"] {
+  background-color: #0cad0b !important;
+  color: white !important;
+  font-size: 9px;
+}
+
+.owl-theme .owl-nav {
+  margin-top: 2px;
+}
+
+/* .owl-carousel {
+  background: red;
+} */

@@ -1,0 +1,17 @@
+<section class="bg-main-light w-75 mx-auto rounded-3 p-3">
+  <h1 class="text-center fw-bold">Wishlist</h1>
+  <div
+    class="row align-items-center border-bottom my-3 pb-3"
+    *ngFor="let product of wishlistProducts"
+  >
+    <div class="col-md-2">
+      <img class="w-100" [src]="product.imageCover" [alt]="product.title" />
+    </div>
+    <div class="col-md-10">
+      <h3>{{ product.title }}</h3>
+      <p>{{ product.brand.name }}</p>
+      <p class="text-main">{{ product.price | currency : " EGP " }}</p>
+      <button (click)="deleteItem(product.id)" class="btn-main">Remove</button>
+    </div>
+  </div>
+</section>

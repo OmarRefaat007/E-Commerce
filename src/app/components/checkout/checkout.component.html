@@ -1,0 +1,50 @@
+<section class="bg-main-light p-4 rounded-3 w-50 mx-auto my-3 shadow">
+  <form [formGroup]="checkout" (ngSubmit)="handleForm()">
+    <div>
+      <label for="details">Details : </label>
+      <textarea
+        id="details"
+        class="form-control"
+        formControlName="details"
+      ></textarea>
+    </div>
+    <div>
+      <label for="phone">Phone : </label>
+      <input
+        id="phone"
+        type="number"
+        class="form-control"
+        formControlName="phone"
+      />
+    </div>
+    <div>
+      <label for="city">City : </label>
+      <input id="city" class="form-control" formControlName="city" />
+    </div>
+    <div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="isOnline"
+          formControlName="isOnline"
+          id="visa"
+          value="visa"
+        />
+        <label class="form-check-label" for="visa"> Online Payment </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="isOnline"
+          formControlName="isOnline"
+          id="cash"
+          value="cash"
+        />
+        <label class="form-check-label" for="cash"> Cash Payment </label>
+      </div>
+    </div>
+    <button class="btn-main" type="submit">Pay</button>
+  </form>
+</section>

@@ -1,0 +1,37 @@
+<section class="bg-main-light w-75 mx-auto rounded-3 p-3">
+  <h1 class="h3">All Orders</h1>
+  <div class="row align-items-center">
+    <div class="col-12 border-bottom my-3" *ngFor="let item of userOrders">
+      <div class="row align-items-center">
+        <div class="col-md-2">
+          <owl-carousel-o [options]="ordersOptions">
+            <ng-container *ngFor="let slide of item.cartItems">
+              <ng-template carouselSlide>
+                <img [src]="slide.product.imageCover" class="w-100" />
+              </ng-template>
+            </ng-container>
+          </owl-carousel-o>
+        </div>
+        <div class="col-md-6">
+          <p>Order Date : {{ item.createdAt | date : "medium" }}</p>
+          <p>Paid Date : {{ item.paidAt | date : "medium" }}</p>
+          <p>
+            <i
+              [ngClass]="
+                item.isDelivered
+                  ? 'fa-regular fa-circle-check text-success'
+                  : 'fa-regular fa-circle-xmark text-danger'
+              "
+            ></i>
+
+            Delivered
+          </p>
+        </div>
+        <div class="col-md-4 my-3">
+          <p>Order Price : {{ item.totalOrderPrice }}</p>
+          <p>payment Method : {{ item.paymentMethodType }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

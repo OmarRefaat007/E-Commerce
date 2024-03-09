@@ -1,0 +1,86 @@
+<section class="my-4">
+  <h2 class="text-center">All Products</h2>
+
+  <input
+    type="search"
+    class="form-control w-50 mx-auto my-3"
+    placeholder="Search"
+    [(ngModel)]="searchTerm"
+  />
+
+  <div class="row justify-content-center g-4">
+    <div
+      class="col-md-4 col-lg-2"
+      *ngFor="
+        let item of products
+          | search : searchTerm
+          | paginate
+            : {
+                id: 'productPaginate',
+                itemsPerPage: pageSize,
+                currentPage: currentPage,
+                totalItems: total
+              }
+      "
+    >
+      <div class="product">
+        <button
+          *ngIf="item.wishlist"
+          class="my-btn rounded-3 mt-2 ms-2"
+          (click)="removeFromWishlist(item._id)"
+        >
+          <i
+            class="fa-solid fa-heart"
+            [ngClass]="item.wishlist ? 'text-danger' : 'text-white'"
+          ></i>
+          - Remove from Wishlist
+        </button>
+        <button
+          *ngIf="!item.wishlist"
+          class="my-btn rounded-3 mt-2 ms-2"
+          (click)="addProductToWishlist(item._id)"
+        >
+          <i
+            class="fa-solid fa-heart"
+            [ngClass]="item.wishlist ? 'text-danger' : 'text-white'"
+          ></i>
+          + Add to Wishlist
+        </button>
+
+        <div [routerLink]="['/details', item._id]" class="p-2 cursor-pointer">
+          <img [src]="item.imageCover" class="w-100" [alt]="item.title" />
+          <h3 class="h6">{{ item.category.name | buy }}</h3>
+          <h4 class="h6">{{ item.title | termText }}</h4>
+          <div class="d-flex align-items-center justify-content-between">
+            <span>{{ item.price | currency : " EGP " }} </span>
+            <div>
+              <i class="fas fa-star rating-color"></i>
+              <span class="text-muted"> {{ item.ratingsAverage }} </span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-main w-100" (click)="addProductToCart(item._id)">
+          Add Product
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <pagination-controls
+      id="productPaginate"
+      (pageChange)="pageChanged($event)"
+      (pageBoundsCorrection)="pageChanged($event)"
+      [maxSize]="9"
+      [directionLinks]="true"
+      [autoHide]="true"
+      [responsive]="true"
+      previousLabel="Previous"
+      nextLabel="Next"
+      screenReaderPaginationLabel="Pagination"
+      screenReaderPageLabel="page"
+      screenReaderCurrentLabel="You're on page"
+    >
+    </pagination-controls>
+  </div>
+</section>

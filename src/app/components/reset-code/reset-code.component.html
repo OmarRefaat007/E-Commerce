@@ -1,0 +1,14 @@
+<section class="bg-main-light w-75 mx-auto rounded-3 p-3">
+  <form [formGroup]="resetCodeForm" (ngSubmit)="handleForm()">
+    <div class="d-flex align-items-center justify-content-center mb-3">
+      <label class="me-2" for="resetCode">Reset Code : </label>
+      <input
+        formControlName="resetCode"
+        id="resetCode"
+        class="form-control w-75"
+        placeholder="Enter Reset Code"
+      />
+    </div>
+    <button type="submit" class="btn-main d-block ms-auto">Send Code</button>
+  </form>
+</section>
